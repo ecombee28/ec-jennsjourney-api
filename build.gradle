@@ -1,0 +1,70 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.6.6'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'maven-publish'
+    id 'idea'
+}
+
+group = 'com.combee'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('springCloudAzureVersion', "5.0.0")
+}
+
+dependencies {
+    
+    annotationProcessor "org.projectlombok:lombok:1.18.22"
+    developmentOnly "org.springframework.boot:spring-boot-devtools:2.6.6"
+    implementation "org.jetbrains:annotations:23.0.0"
+    implementation "org.postgresql:postgresql:42.2.14"
+    implementation "org.projectlombok:lombok:1.18.22"
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation "org.springframework.boot:spring-boot-starter-actuator:2.6.6"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:2.6.6"
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation 'com.azure.spring:spring-cloud-azure-starter-storage'
+    implementation "org.springframework.boot:spring-boot-starter-web:2.6.6"
+    runtimeOnly "com.azure.spring:azure-spring-boot-starter-keyvault-secrets:3.14.0"
+    testCompileOnly "org.springdoc:springdoc-openapi-webmvc-core:1.6.7"
+    testImplementation "com.h2database:h2:1.4.200"
+    testImplementation "io.rest-assured:json-path:5.0.1"
+    testImplementation "io.rest-assured:rest-assured-all:5.0.1"
+    testImplementation "io.rest-assured:rest-assured:5.0.1"
+    testImplementation "io.rest-assured:xml-path:5.0.1"
+    testImplementation "org.apache.commons:commons-text:1.9"
+    testImplementation "org.mockito:mockito-core:4.4.0"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:2.6.6"
+    testImplementation "org.testng:testng:7.5"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "com.azure.spring:spring-cloud-azure-dependencies:${springCloudAzureVersion}"
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+
+//hibernate {
+//    enhancement {
+//        lazyInitialization true
+//        dirtyTracking true
+//        associationManagement true
+//    }
+//}
