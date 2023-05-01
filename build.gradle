@@ -58,3 +58,18 @@ dependencyManagement {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+publishing {
+    publications {
+        customLibrary(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'sampleRepo'
+            url = layout.buildDirectory.dir("repo")
+        }
+    }
+}
