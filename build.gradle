@@ -2,12 +2,10 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.6.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'maven-publish'
-    id 'idea'
 }
 
 group = 'com.combee'
-version = '1.0'
+version = '1'
 sourceCompatibility = '17'
 
 configurations {
@@ -57,19 +55,4 @@ dependencyManagement {
 
 tasks.named('test') {
     useJUnitPlatform()
-}
-
-publishing {
-    publications {
-        customLibrary(MavenPublication) {
-            from components.java
-        }
-    }
-
-    repositories {
-        maven {
-            name = 'sampleRepo'
-            url = layout.buildDirectory.dir("repo")
-        }
-    }
 }
